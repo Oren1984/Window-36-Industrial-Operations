@@ -7,7 +7,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONPATH=/app
 
 WORKDIR /app
-RUN useradd --create-home --uid 10001 w36
+# Pick up Debian security fixes released after the base image was built.
+RUN apt-get update && apt-get upgrade -y --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+    && useradd --create-home --uid 10001 w36
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt

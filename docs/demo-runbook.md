@@ -48,7 +48,7 @@ cheapest plan; sign in as `viewer` to see every control disabled; *Reset scenari
 
 ## Verification record (V1.0, 2026-11-12)
 
-Local machine: Windows 11, Docker 29.9, Python 3.12.10.
+Local machine: Windows 11, Docker 29.9, Python 3.12.10. After the dependency fix the suite was also run in a `python:3.12-slim` container (61 passed).
 
 | Check | Command | Result |
 |---|---|---|
@@ -58,7 +58,7 @@ Local machine: Windows 11, Docker 29.9, Python 3.12.10.
 | Streamlit UI workflow tests (AppTest) | `pytest tests/ui` | **4 passed** |
 | Compose smoke test | `bash scripts/compose_smoke.sh` | **passed**: clean start, migrate exit 0, UI health ok, seeded data, sea misses window, app role cannot run DDL, DB port not published, state persists across full stop/start |
 | UI demonstration in a real browser | headless Microsoft Edge via DevTools protocol against the Compose stack, steps 1–10 above | **completed**; screenshots in `docs/images/` are from this run |
-| Secret, dependency and image scans | CI `security` and `image-and-smoke` jobs | run in GitHub Actions only (not run locally) — see the latest CI run |
+| Secret, dependency and image scans | CI `security` and `image-and-smoke` jobs | run in GitHub Actions only. First run: gitleaks clean; pip-audit and Trivy flagged Pillow 12.3 (via Streamlit 1.60) and Debian zlib. Fixed by moving to Streamlit 1.66.1 + Pillow 13.0.0 and upgrading OS packages in the image; the full suite (61 tests), smoke test and browser demo were re-run on the fixed image |
 
 What the tests cover: road, air and sea evaluation; missed cutoffs (delay and late dispatch); receiving
 hours; site time zones and DST; task dependencies, crew calendars and critical path; donor-site impact; the
