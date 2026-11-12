@@ -1,0 +1,14 @@
+# FICTIONAL DEMO DOCUMENT - synthetic data for the Window 36 simulator. Not a real supplier.
+# Norvane Components (fictional) - advance shipping notice
+DOCUMENT_TYPE: supplier_notice
+SOURCE_REF: NVC-SN-2026-0412
+DELIVERY_REF: DEL-FR-0220-01
+PART_NUMBER: W36-CPL-4471
+REVISION: C
+SERIAL: NVC-4471-00918
+QUANTITY: 1
+SHIP_DATE: 2026-02-19
+EXPECTED_ARRIVAL: 2026-02-20T01:30:00+00:00
+ORIGIN: Norvane Components, Gent (fictional)
+DESTINATION: FR-VAL
+CARRIER: Norvane own fleet (fictional)

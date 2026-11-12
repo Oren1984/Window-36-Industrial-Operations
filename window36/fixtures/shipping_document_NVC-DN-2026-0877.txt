@@ -1,0 +1,14 @@
+# FICTIONAL DEMO DOCUMENT - synthetic data for the Window 36 simulator. Not a real carrier document.
+# Delivery note / CMR copy attached to the pallet (fictional)
+DOCUMENT_TYPE: shipping_document
+SOURCE_REF: NVC-DN-2026-0877
+DELIVERY_REF: DEL-FR-0220-01
+PART_NUMBER: W36-CPL-4471
+REVISION: B
+SERIAL: NVC-4471-00918
+QUANTITY: 1
+SHIP_DATE: 2026-02-19
+EXPECTED_ARRIVAL: 2026-02-20T01:30:00+00:00
+ORIGIN: Norvane Components, Gent (fictional)
+DESTINATION: FR-VAL
+CARRIER: Norvane own fleet (fictional)

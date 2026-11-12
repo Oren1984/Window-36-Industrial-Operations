@@ -1,0 +1,2 @@
+# Documented image-scan exceptions (CVE id + reason). Keep empty unless a finding is
+# genuinely not applicable or has no fix; every entry needs a reason and a review date.

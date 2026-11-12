@@ -1,0 +1,59 @@
+# Window 36 — one command brings up the seeded demo:  docker compose up --build
+# Defaults below are local-demo credentials only; override them in a git-ignored .env (see .env.example).
+name: window36
+
+x-owner-url: &owner_url postgresql+psycopg://w36_owner:${W36_DB_OWNER_PASSWORD:-w36-owner-local-demo}@db:5432/window36
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: window36
+      POSTGRES_USER: w36_owner
+      POSTGRES_PASSWORD: ${W36_DB_OWNER_PASSWORD:-w36-owner-local-demo}
+      W36_APP_DB_PASSWORD: ${W36_APP_DB_PASSWORD:-w36-app-local-demo}
+    volumes:
+      - w36_pgdata:/var/lib/postgresql/data
+      - ./docker/db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U w36_owner -d window36"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+    # No published ports: the database is reachable only on the Compose network.
+
+  migrate:
+    build: .
+    image: window36-app:1.0
+    command: ["python", "-m", "window36.cli", "migrate-and-seed"]
+    environment:
+      W36_DATABASE_URL: *owner_url
+      W36_APP_DB_ROLE: w36_app
+      W36_DEMO_PASSWORD: ${W36_DEMO_PASSWORD:-window36-demo}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  app:
+    build: .
+    image: window36-app:1.0
+    environment:
+      W36_DATABASE_URL: postgresql+psycopg://w36_app:${W36_APP_DB_PASSWORD:-w36-app-local-demo}@db:5432/window36
+      W36_POLICY_CUSTOMS_ENABLED: ${W36_POLICY_CUSTOMS_ENABLED:-false}
+      W36_APPROVER_SPEND_LIMIT_EUR: ${W36_APPROVER_SPEND_LIMIT_EUR:-15000}
+      W36_LOG_LEVEL: ${W36_LOG_LEVEL:-INFO}
+    ports:
+      - "127.0.0.1:${W36_UI_PORT:-8501}:8501"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
+
+volumes:
+  w36_pgdata:

@@ -1,0 +1,26 @@
+[project]
+name = "window36"
+version = "1.0.0"
+description = "Window 36 — shutdown planning and approval simulator (synthetic demo data)"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["migrations/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "BLE"]
+ignore = [
+    "S101",  # assert is fine in tests
+    "S608",  # SQL built only from fixed table/role identifiers validated in code
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S105", "S106"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = []
+filterwarnings = ["ignore::DeprecationWarning:altair.*"]

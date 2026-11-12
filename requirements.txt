@@ -1,0 +1,6 @@
+streamlit==1.60.0
+SQLAlchemy==2.0.36
+alembic==1.14.0
+psycopg[binary]==3.2.13
+bcrypt==5.0.0
+tzdata==2025.3

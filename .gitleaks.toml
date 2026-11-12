@@ -1,0 +1,15 @@
+# Use the default gitleaks rules. The only allowlisted values are the documented local-demo
+# placeholders (docker-compose defaults, .env.example, test fixtures); they protect nothing real.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Documented local-demo placeholder credentials"
+regexes = [
+  '''w36-(owner|app)-local-demo''',
+  '''window36-demo''',
+  '''change-me-(owner|app|demo)''',
+  '''test-demo-password''',
+  '''ci-only''',
+  '''devonly''',
+]
