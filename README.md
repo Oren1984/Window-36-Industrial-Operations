@@ -35,10 +35,13 @@ seeds the demo idempotently, then starts the Streamlit UI. Data persists in the 
 `docker compose down -v` removes it.
 
 Sign in with a demo account — `planner_fr`, `operator_fr`, `approver_fr`, `approver_de`, `approver_ie`,
-`viewer` and others (see the in-app **Help** page). The local-demo password is `window36-demo`; set
+`viewer` and others (listed in the in-app **Help Center**). The local-demo password is `window36-demo`; set
 your own in `.env` (copy [`.env.example`](.env.example)). Port in use? Set `W36_UI_PORT`.
 
 ## Demo in two minutes
+
+> New to Window 36? Open **Help Center** (first item in the app's sidebar, no sign-in needed). It explains
+> the scenario, walks through the demo step by step, describes every screen and status, and lists the accounts.
 
 1. **Procurement and Logistics** (`planner_fr`): review the two staged documents — the supplier notice says
    rev C, the delivery note says rev B. The part is quarantined.

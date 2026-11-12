@@ -44,18 +44,18 @@ def pick_plan(at: AppTest, plan_key: str) -> AppTest:
 
 
 def test_login_form_and_every_page_renders(db):
-    at = page("help", None)
+    at = page("help_center", None)
     at.text_input(key="login_user").input("viewer")
     at.text_input(key="login_pass").input("test-demo-password")
     at.button[0].click().run()
     assert at.session_state["w36_user"] == "viewer"
-    for name in ("control_room", "procurement_logistics", "plans_qa", "operations_audit", "help"):
+    for name in ("control_room", "procurement_logistics", "plans_qa", "operations_audit", "help_center"):
         at = page(name, "viewer")
         assert any("Developed and built by Oren Salami V1.0" in c.value for c in at.caption)
 
 
 def test_wrong_password_is_rejected(db):
-    at = page("help", None)
+    at = page("help_center", None)
     at.text_input(key="login_user").input("approver_fr")
     at.text_input(key="login_pass").input("nope")
     at.button[0].click().run()

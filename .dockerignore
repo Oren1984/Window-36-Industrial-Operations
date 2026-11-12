@@ -7,7 +7,7 @@
 .ruff_cache
 .venv
 tests
-docs
+docs/*.md
 scripts
 *.md
 .claude

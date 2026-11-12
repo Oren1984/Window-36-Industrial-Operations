@@ -6,7 +6,7 @@
 docker compose up --build
 ```
 
-UI: <http://localhost:8501> (or `W36_UI_PORT`). Demo password: `window36-demo` unless overridden in `.env`.
+UI: <http://localhost:8501> (or `W36_UI_PORT`). First-time users: start at **Help Center** in the sidebar. Demo password: `window36-demo` unless overridden in `.env`.
 The simulated clock starts at **Fri 20 Feb 2026, 03:00 Paris (02:00 UTC)**, four hours before the window
 (07:00 Paris Fri → 19:00 Paris Sat).
 
@@ -55,9 +55,10 @@ Local machine: Windows 11, Docker 29.9, Python 3.12.10. After the dependency fix
 | Format + lint | `ruff format --check . && ruff check .` | pass (47 files) |
 | Unit tests | `pytest tests/unit` | **22 passed** |
 | PostgreSQL integration tests | `pytest tests/integration` | **35 passed** |
-| Streamlit UI workflow tests (AppTest) | `pytest tests/ui` | **4 passed** |
+| Streamlit UI tests (AppTest): workflow + Help Center | `pytest tests/ui` | **11 passed** (Help Center tests check that every label the guide names exists on its screen) |
 | Compose smoke test | `bash scripts/compose_smoke.sh` | **passed**: clean start, migrate exit 0, UI health ok, seeded data, sea misses window, app role cannot run DDL, DB port not published, state persists across full stop/start |
 | UI demonstration in a real browser | headless Microsoft Edge via DevTools protocol against the Compose stack, steps 1–10 above | **completed**; screenshots in `docs/images/` are from this run |
+| Help Center in Compose | headless Edge: opened without signing in and as `viewer` (all six tabs, four screenshots render, viewer's approve and scenario buttons disabled); then walked steps 1–7 exactly as written, asserting each on-screen fact the guide states | **passed** (2026-11-12, after one wording fix in step 1) |
 | Secret, dependency and image scans | CI `security` and `image-and-smoke` jobs | run in GitHub Actions only. First run: gitleaks clean; pip-audit and Trivy flagged Pillow 12.3 (via Streamlit 1.60) and Debian zlib. Fixed by moving to Streamlit 1.66.1 + Pillow 13.0.0 and upgrading OS packages in the image; the full suite (61 tests), smoke test and browser demo were re-run on the fixed image |
 
 What the tests cover: road, air and sea evaluation; missed cutoffs (delay and late dispatch); receiving

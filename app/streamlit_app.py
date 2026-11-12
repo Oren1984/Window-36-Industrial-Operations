@@ -12,11 +12,11 @@ st.set_page_config(page_title="Window 36", page_icon="🛠️", layout="wide")
 VIEWS = Path(__file__).resolve().parent / "views"
 nav = st.navigation(
     [
+        st.Page(str(VIEWS / "help_center.py"), title="Help Center", icon="❓"),
         st.Page(str(VIEWS / "control_room.py"), title="Shutdown Control Room", icon="🕹️", default=True),
         st.Page(str(VIEWS / "procurement_logistics.py"), title="Procurement and Logistics", icon="🚚"),
         st.Page(str(VIEWS / "plans_qa.py"), title="Plans and QA", icon="✅"),
         st.Page(str(VIEWS / "operations_audit.py"), title="Operations and Audit", icon="📋"),
-        st.Page(str(VIEWS / "help.py"), title="Help", icon="❓"),
     ]
 )
 nav.run()

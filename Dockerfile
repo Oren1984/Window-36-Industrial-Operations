@@ -20,6 +20,7 @@ COPY migrations ./migrations
 COPY window36 ./window36
 COPY app ./app
 COPY .streamlit ./.streamlit
+COPY docs/images ./docs/images
 
 USER w36
 EXPOSE 8501

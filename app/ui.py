@@ -152,7 +152,7 @@ def page(title: str, intro: str) -> Actor | None:
 
 def require_login(actor: Actor | None) -> bool:
     if actor is None:
-        st.info("Sign in from the sidebar to view this page. Demo accounts are listed on the Help page.")
+        st.info("Sign in from the sidebar to view this page. New here? Open the Help Center in the sidebar.")
         return False
     return True
 
